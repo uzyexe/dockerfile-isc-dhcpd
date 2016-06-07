@@ -20,3 +20,11 @@ This Docker image is based on the official [alpine:3.3](https://hub.docker.com/_
 docker run --rm --net="host" uzyexe/isc-dhcpd
 
 ```
+
+# Authors and Contributors
+
+* Shuji Yamada (<uzy.exe@gmail.com>)
+
+## License
+
+This project is licensed under the terms of the MIT license.
