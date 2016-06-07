@@ -5,7 +5,7 @@ if [ ! -f /etc/dhcpd.conf ]; then
     PAIR=$(netmask -s $IP | awk '{print $1}')
     NETWORK=$(echo $PAIR | cut -d/ -f1)
     NETMASK=$(echo $PAIR | cut -d/ -f2)
-    cp /default_dhcpd.conf /etc/dhcpd.conf
+    cp /etc/dhcpd.conf.example /etc/dhcpd.conf
     echo "subnet $NETWORK netmask $NETMASK { }" >> /etc/dhcpd.conf
 fi
 

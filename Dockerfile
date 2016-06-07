@@ -3,7 +3,7 @@ FROM alpine:3.3
 RUN apk add --update dhcp && \
     touch /var/lib/dhcp/dhcpd.leases
 ADD dhcpd.sh /dhcpd
-ADD dhcpd.conf /etc/dhcpd.conf
+ADD dhcpd.conf /etc/dhcpd.conf.example
 
 EXPOSE 67
 EXPOSE 67/udp
