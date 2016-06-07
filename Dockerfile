@@ -1,11 +1,9 @@
-FROM debian:jessie
+FROM alpine:3.3
 
-RUN DEBIAN_FRONTEND=noninteractive && \
-    apt-get update && \
-    apt-get install -y netmask isc-dhcp-server
-
+RUN apk add --update dhcp && \
+    touch /var/lib/dhcp/dhcpd.leases
 ADD dhcpd.sh /dhcpd
-ADD dhcpd.conf /default_dhcpd.conf
+ADD dhcpd.conf /etc/dhcpd.conf
 
 EXPOSE 67
 EXPOSE 67/udp
@@ -17,4 +15,4 @@ EXPOSE 847
 EXPOSE 847/udp
 
 ENTRYPOINT ["/dhcpd"]
-CMD ["-f", "-cf", "/data/dhcpd.conf", "-lf", "/data/dhcpd.leases", "--no-pid"]
+CMD ["-f", "-cf", "/etc/dhcpd.conf", "-lf", "/var/lib/dhcp/dhcpd.leases", "--no-pid"]
