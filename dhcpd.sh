@@ -1,10 +1,9 @@
 #!/bin/sh
 
 if [ ! -f /etc/dhcpd.conf ]; then
-    IP=$(/sbin/ip -o -4 addr list eth0 | awk '{print $4}' | cut -d/ -f1)
-    PAIR=$(netmask -s $IP | awk '{print $1}')
-    NETWORK=$(echo $PAIR | cut -d/ -f1)
-    NETMASK=$(echo $PAIR | cut -d/ -f2)
+    IPADDR=$(/sbin/ip -o -4 addr list eth0 | awk '{print $4}')
+    NETWORK=$(ipcalc -n $IPADDR | cut -d"=" -f2)
+    NETMASK=$(ipcalc -m $IPADDR | cut -d"=" -f2)
     cp /etc/dhcpd.conf.example /etc/dhcpd.conf
     echo "subnet $NETWORK netmask $NETMASK { }" >> /etc/dhcpd.conf
 fi
